@@ -1,0 +1,651 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Bilolbek Orzikulov | Software Engineer & AI Specialist</title>
+  
+  <!-- Modern Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+  
+  <style>
+    :root {
+      --bg-base: #06080d;
+      --card-bg: rgba(15, 23, 42, 0.72);
+      --card-border: rgba(255, 255, 255, 0.12);
+      --card-hover-border: rgba(56, 189, 248, 0.45);
+      --text-main: #f8fafc;
+      --text-muted: #94a3b8;
+      --accent: #38bdf8;
+      --accent-purple: #c084fc;
+      --radius: 18px;
+      --transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      font-family: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, sans-serif;
+      color: var(--text-main);
+      background-color: var(--bg-base);
+      line-height: 1.6;
+      min-height: 100vh;
+      position: relative;
+      overflow-x: hidden;
+    }
+
+    /* Background Photo with ~20% Blur & Dark Gradient Overlay */
+    .bg-photo {
+      position: fixed;
+      top: -15px;
+      left: -15px;
+      right: -15px;
+      bottom: -15px;
+      background-image: url('background.jpg');
+      background-size: cover;
+      background-position: center;
+      background-repeat: no-repeat;
+      filter: blur(8px) brightness(0.65); /* 20% blur effect */
+      transform: scale(1.05);
+      z-index: -2;
+    }
+
+    .bg-tint {
+      position: fixed;
+      inset: 0;
+      background: radial-gradient(circle at 80% 20%, rgba(56, 189, 248, 0.15), transparent 45%),
+                  radial-gradient(circle at 20% 80%, rgba(192, 132, 252, 0.15), transparent 50%),
+                  rgba(6, 8, 13, 0.75);
+      z-index: -1;
+    }
+
+    .container {
+      max-width: 980px;
+      margin: 0 auto;
+      padding: 0 24px;
+    }
+
+    /* Navigation Bar */
+    header {
+      position: sticky;
+      top: 20px;
+      z-index: 100;
+      margin-bottom: 40px;
+    }
+
+    nav {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 14px 24px;
+      background: rgba(15, 23, 42, 0.65);
+      backdrop-filter: blur(20px);
+      -webkit-backdrop-filter: blur(20px);
+      border: 1px solid var(--card-border);
+      border-radius: 9999px;
+      box-shadow: 0 12px 32px rgba(0, 0, 0, 0.5);
+    }
+
+    .brand {
+      font-weight: 800;
+      font-size: 1.1rem;
+      letter-spacing: -0.5px;
+      color: #fff;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .tag-badge {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 0.75rem;
+      padding: 3px 8px;
+      background: rgba(56, 189, 248, 0.15);
+      color: var(--accent);
+      border-radius: 6px;
+      border: 1px solid rgba(56, 189, 248, 0.3);
+    }
+
+    .nav-items {
+      display: flex;
+      gap: 22px;
+      list-style: none;
+    }
+
+    .nav-items a {
+      color: var(--text-muted);
+      text-decoration: none;
+      font-size: 0.9rem;
+      font-weight: 500;
+      transition: var(--transition);
+    }
+
+    .nav-items a:hover {
+      color: #fff;
+    }
+
+    /* Hero */
+    .hero {
+      padding: 70px 0 50px;
+      text-align: center;
+    }
+
+    .status-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 6px 16px;
+      border-radius: 9999px;
+      background: rgba(56, 189, 248, 0.1);
+      border: 1px solid rgba(56, 189, 248, 0.3);
+      color: var(--accent);
+      font-size: 0.85rem;
+      font-weight: 600;
+      margin-bottom: 24px;
+    }
+
+    .status-pulse {
+      width: 8px;
+      height: 8px;
+      background: #22c55e;
+      border-radius: 50%;
+      box-shadow: 0 0 10px #22c55e;
+    }
+
+    .hero h1 {
+      font-size: clamp(2.4rem, 5.5vw, 3.8rem);
+      font-weight: 800;
+      letter-spacing: -1.5px;
+      line-height: 1.15;
+      margin-bottom: 18px;
+      background: linear-gradient(135deg, #ffffff 40%, #94a3b8 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+
+    .hero-subtitle {
+      font-size: 1.25rem;
+      color: var(--accent);
+      font-weight: 600;
+      margin-bottom: 18px;
+    }
+
+    .hero-bio {
+      max-width: 680px;
+      margin: 0 auto 34px;
+      font-size: 1.08rem;
+      color: var(--text-muted);
+    }
+
+    .cta-group {
+      display: flex;
+      justify-content: center;
+      gap: 16px;
+      flex-wrap: wrap;
+    }
+
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 13px 28px;
+      border-radius: 12px;
+      font-size: 0.95rem;
+      font-weight: 600;
+      text-decoration: none;
+      transition: var(--transition);
+      cursor: pointer;
+    }
+
+    .btn-primary {
+      background: linear-gradient(135deg, #0284c7, #2563eb);
+      color: #fff;
+      box-shadow: 0 10px 24px -6px rgba(37, 99, 235, 0.5);
+      border: none;
+    }
+
+    .btn-primary:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 14px 28px -4px rgba(37, 99, 235, 0.7);
+    }
+
+    .btn-secondary {
+      background: rgba(255, 255, 255, 0.06);
+      color: #fff;
+      border: 1px solid var(--card-border);
+      backdrop-filter: blur(10px);
+    }
+
+    .btn-secondary:hover {
+      background: rgba(255, 255, 255, 0.12);
+      border-color: rgba(255, 255, 255, 0.3);
+      transform: translateY(-2px);
+    }
+
+    /* Cards & Layout */
+    section {
+      padding: 44px 0;
+    }
+
+    .section-label {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 0.8rem;
+      color: var(--accent);
+      text-transform: uppercase;
+      letter-spacing: 1.5px;
+      margin-bottom: 8px;
+    }
+
+    .section-title {
+      font-size: 1.9rem;
+      font-weight: 700;
+      letter-spacing: -0.5px;
+      color: #fff;
+      margin-bottom: 24px;
+    }
+
+    .glass-card {
+      background: var(--card-bg);
+      backdrop-filter: blur(20px);
+      -webkit-backdrop-filter: blur(20px);
+      border: 1px solid var(--card-border);
+      border-radius: var(--radius);
+      padding: 32px;
+      box-shadow: 0 20px 40px rgba(0, 0, 0, 0.4);
+      transition: var(--transition);
+    }
+
+    .glass-card:hover {
+      border-color: var(--card-hover-border);
+    }
+
+    .grid-2 {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+      gap: 22px;
+    }
+
+    .grid-3 {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+      gap: 20px;
+    }
+
+    /* Feature Items */
+    .icon-box {
+      width: 44px;
+      height: 44px;
+      border-radius: 12px;
+      background: rgba(56, 189, 248, 0.15);
+      border: 1px solid rgba(56, 189, 248, 0.3);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.25rem;
+      margin-bottom: 16px;
+    }
+
+    .card h3 {
+      font-size: 1.18rem;
+      color: #fff;
+      margin-bottom: 10px;
+    }
+
+    .card p {
+      color: var(--text-muted);
+      font-size: 0.95rem;
+    }
+
+    /* Project Showcase Card */
+    .project-card {
+      border-left: 4px solid var(--accent);
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+    }
+
+    .project-pill {
+      display: inline-block;
+      align-self: flex-start;
+      background: rgba(192, 132, 252, 0.15);
+      color: var(--accent-purple);
+      border: 1px solid rgba(192, 132, 252, 0.3);
+      padding: 4px 12px;
+      border-radius: 9999px;
+      font-size: 0.75rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      margin-bottom: 16px;
+    }
+
+    .tech-tags {
+      display: flex;
+      gap: 10px;
+      margin: 18px 0 24px;
+      flex-wrap: wrap;
+    }
+
+    .tech-tag {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 0.75rem;
+      padding: 4px 10px;
+      border-radius: 6px;
+      background: rgba(255, 255, 255, 0.06);
+      color: #cbd5e1;
+      border: 1px solid rgba(255, 255, 255, 0.08);
+    }
+
+    /* Now Section Card */
+    .now-card {
+      background: linear-gradient(135deg, rgba(20, 27, 45, 0.8), rgba(12, 18, 32, 0.8));
+      border: 1px solid rgba(56, 189, 248, 0.3);
+    }
+
+    .now-items {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 14px;
+      margin-top: 18px;
+    }
+
+    .now-items li {
+      display: flex;
+      align-items: flex-start;
+      gap: 12px;
+      color: #e2e8f0;
+      font-size: 1rem;
+    }
+
+    .now-arrow {
+      color: var(--accent);
+      font-weight: bold;
+    }
+
+    /* Contacts */
+    .contact-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(210px, 1fr));
+      gap: 16px;
+      margin-top: 20px;
+    }
+
+    .contact-btn {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      padding: 16px 20px;
+      background: rgba(255, 255, 255, 0.04);
+      border: 1px solid var(--card-border);
+      border-radius: 14px;
+      text-decoration: none;
+      color: #fff;
+      transition: var(--transition);
+    }
+
+    .contact-btn:hover {
+      background: rgba(56, 189, 248, 0.12);
+      border-color: var(--accent);
+      transform: translateY(-3px);
+    }
+
+    .contact-btn .network {
+      font-weight: 700;
+      font-size: 0.95rem;
+    }
+
+    .contact-btn .username {
+      font-size: 0.85rem;
+      color: var(--text-muted);
+    }
+
+    /* Footer */
+    footer {
+      padding: 40px 0;
+      text-align: center;
+      color: var(--text-muted);
+      font-size: 0.85rem;
+      border-top: 1px solid rgba(255, 255, 255, 0.08);
+      margin-top: 60px;
+    }
+
+    @media (max-width: 768px) {
+      .nav-items { display: none; }
+      .hero { padding: 40px 0 25px; }
+      .hero h1 { font-size: 2.2rem; }
+      .glass-card { padding: 22px; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Background image with 20% blur & dark gradient overlay -->
+  <div class="bg-photo"></div>
+  <div class="bg-tint"></div>
+
+  <div class="container">
+    <!-- Header -->
+    <header>
+      <nav>
+        <div class="brand">
+          Bilolbek Orzikulov
+          <span class="tag-badge">SE & AI</span>
+        </div>
+        <ul class="nav-items">
+          <li><a href="#about">About</a></li>
+          <li><a href="#vision">Vision</a></li>
+          <li><a href="#skills">Expertise</a></li>
+          <li><a href="#projects">Work</a></li>
+          <li><a href="#now">Now</a></li>
+          <li><a href="#contact">Contact</a></li>
+        </ul>
+      </nav>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="hero">
+      <div class="status-badge">
+        <span class="status-pulse"></span>
+        Available for Worldwide Projects & Collaborations
+      </div>
+      <h1>Engineering Solutions with Code & AI</h1>
+      <div class="hero-subtitle">Software Engineer & AI Specialist · Tech Entrepreneur</div>
+      <p class="hero-bio">
+        Passionate about crafting intelligent digital products, automation bots, and full-stack web applications that solve real-world problems.
+      </p>
+      <div class="cta-group">
+        <a href="#projects" class="btn btn-primary">View Featured Project →</a>
+        <a href="#contact" class="btn btn-secondary">Get in Touch</a>
+      </div>
+    </section>
+
+    <!-- About Section -->
+    <section id="about">
+      <div class="section-label">// Background</div>
+      <h2 class="section-title">About Me</h2>
+      <div class="glass-card">
+        <p style="font-size: 1.1rem; color: #f1f5f9; margin-bottom: 18px;">
+          Since childhood, I have been deeply drawn to creating things that help people through technology and software. That curiosity grew into building functional web applications, automated bots, and AI workflows.
+        </p>
+        <p style="color: var(--text-muted); font-size: 1.02rem; margin-bottom: 24px;">
+          I am currently working in the IT field with a clear focus on becoming a tech entrepreneur, building impactful digital ventures, and bridging the gap between cutting-edge AI and everyday business needs.
+        </p>
+        
+        <div class="grid-3" style="margin-top: 10px;">
+          <div class="glass-card" style="padding: 20px;">
+            <div class="icon-box">🌍</div>
+            <h3>3 Fluent Languages</h3>
+            <p>Native language, Russian, and English for international communications and collaboration.</p>
+          </div>
+          <div class="glass-card" style="padding: 20px;">
+            <div class="icon-box">🧠</div>
+            <h3>AI & Prompt Engineering</h3>
+            <p>Hands-on development with leading AI models, custom prompt architectures, and code optimization.</p>
+          </div>
+          <div class="glass-card" style="padding: 20px;">
+            <div class="icon-box">🌐</div>
+            <h3>Global Delivery</h3>
+            <p>Creating websites and intelligent bots tailored for worldwide users and businesses.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Vision Section -->
+    <section id="vision">
+      <div class="section-label">// Entrepreneurship & Future</div>
+      <h2 class="section-title">Vision: Developer Network in Uzbekistan</h2>
+      <div class="glass-card">
+        <div class="grid-2">
+          <div>
+            <h3 style="font-size: 1.25rem; color: #fff; margin-bottom: 14px;">Empowering Businesses & Individuals</h3>
+            <p style="color: var(--text-muted); margin-bottom: 16px;">
+              My long-term ambition is to launch a nationwide network of software engineers across Uzbekistan. The mission is to assist both commercial enterprises and private clients with digital acceleration:
+            </p>
+            <ul style="list-style: none; display: flex; flex-direction: column; gap: 10px; color: #cbd5e1;">
+              <li><span style="color: var(--accent);">✓</span> Modern web & mobile application engineering</li>
+              <li><span style="color: var(--accent);">✓</span> AI-powered automation & intelligent bots</li>
+              <li><span style="color: var(--accent);">✓</span> Integrated digital marketing & growth services</li>
+            </ul>
+          </div>
+          <div style="background: rgba(255, 255, 255, 0.03); border: 1px dashed var(--card-border); border-radius: 14px; padding: 24px; display: flex; flex-direction: column; justify-content: center;">
+            <div style="font-family: 'JetBrains Mono', monospace; font-size: 0.85rem; color: var(--accent); margin-bottom: 8px;">CORE MISSION</div>
+            <p style="font-size: 0.95rem; color: #94a3b8;">
+              Uniting top local engineering talent to elevate software quality, foster digital business transformation, and bring global technological standards to Uzbekistan.
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Skills & Expertise -->
+    <section id="skills">
+      <div class="section-label">// Capabilities</div>
+      <h2 class="section-title">AI & Engineering Expertise</h2>
+      <div class="grid-3">
+        <div class="glass-card">
+          <div class="icon-box">⚡</div>
+          <h3>Multi-AI Orchestration</h3>
+          <p>Proficient with multiple generative AI platforms, tailoring specialized models to project requirements.</p>
+        </div>
+        <div class="glass-card">
+          <div class="icon-box">📝</div>
+          <h3>Prompt & Code Engineering</h3>
+          <p>Writing structured prompts and clean code to maximize accuracy, speed, and output quality of AI systems.</p>
+        </div>
+        <div class="glass-card">
+          <div class="icon-box">🛠️</div>
+          <h3>Web & Bot Development</h3>
+          <p>Delivering responsive web applications, Telegram bots, and automated customer interaction pipelines.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- Featured Project -->
+    <section id="projects">
+      <div class="section-label">// Portfolio</div>
+      <h2 class="section-title">Featured Project</h2>
+      <div class="glass-card project-card">
+        <div>
+          <span class="project-pill">Interactive Showcase</span>
+          <h3 style="font-size: 1.55rem; color: #fff; margin-bottom: 12px;">GT-3 Studio Experience</h3>
+          <p style="color: var(--text-muted); font-size: 1.05rem; max-width: 720px;">
+            A high-performance interactive 3D web experience with exploded-view animations, technical specifications, and modern responsive styling.
+          </p>
+          <div class="tech-tags">
+            <span class="tech-tag">Interactive Web</span>
+            <span class="tech-tag">UI/UX Design</span>
+            <span class="tech-tag">3D Studio Experience</span>
+            <span class="tech-tag">Replit App</span>
+          </div>
+        </div>
+        <div style="margin-top: 10px;">
+          <a href="https://gt-3-studio-experience--b11uz.replit.app/#specifications" target="_blank" rel="noopener noreferrer" class="btn btn-primary">
+            Launch Live Project ↗
+          </a>
+        </div>
+      </div>
+    </section>
+
+    <!-- Now Section -->
+    <section id="now">
+      <div class="section-label">// Current Status</div>
+      <h2 class="section-title">What I Am Doing "Now"</h2>
+      <div class="glass-card now-card">
+        <p style="color: var(--text-muted); font-size: 0.95rem;">
+          Inspired by the /now movement — an active overview of my current focus:
+        </p>
+        <ul class="now-items">
+          <li>
+            <span class="now-arrow">▸</span>
+            <span><strong>Global Web & Bot Development:</strong> Building custom websites and automated bots for international users and businesses.</span>
+          </li>
+          <li>
+            <span class="now-arrow">▸</span>
+            <span><strong>AI Optimization & Prompting:</strong> Studying and refining prompts and codebases to elevate the quality of AI-assisted software.</span>
+          </li>
+          <li>
+            <span class="now-arrow">▸</span>
+            <span><strong>Entrepreneurship in IT:</strong> Working actively in the tech sector and laying the foundation for a software engineering network in Uzbekistan.</span>
+          </li>
+        </ul>
+      </div>
+    </section>
+
+    <!-- Contact & Socials -->
+    <section id="contact">
+      <div class="section-label">// Quick Reach</div>
+      <h2 class="section-title">Let's Connect</h2>
+      <div class="glass-card">
+        <p style="color: #cbd5e1; font-size: 1.05rem; margin-bottom: 20px;">
+          Feel free to reach out for project inquiries, custom bots, web development, or collaboration:
+        </p>
+
+        <div class="contact-grid">
+          <a href="https://t.me/b11uz" target="_blank" rel="noopener noreferrer" class="contact-btn">
+            <span style="font-size: 1.5rem;">✈️</span>
+            <div>
+              <div class="network">Telegram</div>
+              <div class="username">@b11uz</div>
+            </div>
+          </a>
+
+          <a href="https://instagram.com/b.11uz" target="_blank" rel="noopener noreferrer" class="contact-btn">
+            <span style="font-size: 1.5rem;">📸</span>
+            <div>
+              <div class="network">Instagram</div>
+              <div class="username">@b.11uz</div>
+            </div>
+          </a>
+
+          <a href="https://tiktok.com/@b11uzz" target="_blank" rel="noopener noreferrer" class="contact-btn">
+            <span style="font-size: 1.5rem;">🎵</span>
+            <div>
+              <div class="network">TikTok</div>
+              <div class="username">@b11uzz</div>
+            </div>
+          </a>
+        </div>
+      </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+      <p>© 2026 Bilolbek Orzikulov. All rights reserved.</p>
+      <p style="margin-top: 6px; font-size: 0.78rem; color: #64748b;">Engineered with lightweight, accessible HTML5 & CSS3.</p>
+    </footer>
+  </div>
+
+</body>
+</html>
